@@ -2,7 +2,7 @@ package com.thoughtworks.springbootemployee.service;
 
 
 import com.thoughtworks.springbootemployee.model.Employee;
-import com.thoughtworks.springbootemployee.repository.RetiringEmployeeRepository;
+import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -24,7 +24,7 @@ public class EmployeeServiceTest {
     private EmployeeService employeeService;
 
     @Mock
-    private RetiringEmployeeRepository retiringEmployeeRepository;
+    private EmployeeRepository employeeRepository;
 
 //    @Test
 //    void should_return_all_employees_when_get_all_employees_given_all_employees(){
@@ -51,7 +51,7 @@ public class EmployeeServiceTest {
     void should_return_correct_employee_when_get_employee_by_id_given_an_employee_id(){
         // Given
         Employee employee = new Employee(1, "Yuto", 23, "Male", 15000);
-        given(retiringEmployeeRepository.findById(1)).willReturn(java.util.Optional.of((employee)));
+        given(employeeRepository.findById(1)).willReturn(java.util.Optional.of((employee)));
 
         // When
         Employee actualEmployees = employeeService.getEmployeeById(1);
@@ -68,7 +68,7 @@ public class EmployeeServiceTest {
         employees.add(new Employee(2, "JC", 22, "Male", 10000));
         employees.add(new Employee(4, "Donald", 21, "Male", 104400));
         employees.add(new Employee(5, "Bob", 69, "Male", 10000));
-        given(retiringEmployeeRepository.findAllByGender("Male")).willReturn(employees);
+        given(employeeRepository.findAllByGender("Male")).willReturn(employees);
 
         // When
         List<Employee> maleEmployees = employeeService.getAllEmployeesByGender("Male");
@@ -104,7 +104,7 @@ public class EmployeeServiceTest {
         employeeService.addEmployee(employee);
 
         // Then
-        verify(retiringEmployeeRepository, times(1)).save(employee);
+        verify(employeeRepository, times(1)).save(employee);
     }
 //
 //    @Test

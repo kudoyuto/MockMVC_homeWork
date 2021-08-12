@@ -1,48 +1,45 @@
 package com.thoughtworks.springbootemployee.service;
 
-import com.thoughtworks.springbootemployee.model.Company;
 import com.thoughtworks.springbootemployee.model.Employee;
 import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
-import com.thoughtworks.springbootemployee.repository.RetiringEmployeeRepository;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class EmployeeService{
 
-    private RetiringEmployeeRepository retiringEmployeeRepository;
+    private EmployeeRepository employeeRepository;
 
-    public EmployeeService(RetiringEmployeeRepository retiringEmployeeRepository) {
-        this.retiringEmployeeRepository = retiringEmployeeRepository;
+    public EmployeeService(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
     }
 
     public List<Employee> getEmployees() {
-        return retiringEmployeeRepository.findAll();
+        return employeeRepository.findAll();
     }
 
     public Employee getEmployeeById(Integer employeeId) {
-        return retiringEmployeeRepository.findById(employeeId).orElse(null);
+        return employeeRepository.findById(employeeId).orElse(null);
     }
 
     public List<Employee> getAllEmployeesByGender(String gender) {
-        return retiringEmployeeRepository.findAllByGender(gender);
+        return employeeRepository.findAllByGender(gender);
     }
 //
     public List<Employee> getEmployeesByPagination(Integer pageIndex, Integer pageSize) {
-        return retiringEmployeeRepository.findAll(PageRequest.of(pageIndex-1,pageSize)).getContent();
+        return employeeRepository.findAll(PageRequest.of(pageIndex-1,pageSize)).getContent();
     }
 //
     public Employee addEmployee(Employee employee) {
-       return retiringEmployeeRepository.save(employee);
+       return employeeRepository.save(employee);
     }
 //
     public Employee updateEmployeeInformation(Integer employeeId, Employee employeeToBeUpdated) {
        Employee currentEmployeeInformation = getEmployeeById(employeeId);
        Employee updatedEmployeeInformation = updateEmployeeInfo(currentEmployeeInformation,employeeToBeUpdated);
-       return retiringEmployeeRepository.save(updatedEmployeeInformation);
+       return employeeRepository.save(updatedEmployeeInformation);
     }
     public Employee updateEmployeeInfo(Employee employee, Employee employeeToBeUpdated) {
         if (employeeToBeUpdated.getName() != null) {
@@ -63,8 +60,8 @@ public class EmployeeService{
         return employee;
     }
 
-//
-//    public void deleteEmployee(Integer employeeId) {
-//        retiringEmployeeRepository.deleteEmployee(employeeId);
-//    }
+
+    public void deleteEmployee(Integer employeeId) {
+        employeeRepository.deleteById(employeeId);
+    }
 }
