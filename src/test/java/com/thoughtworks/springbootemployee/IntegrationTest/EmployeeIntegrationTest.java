@@ -2,9 +2,6 @@ package com.thoughtworks.springbootemployee.IntegrationTest;
 
 import com.thoughtworks.springbootemployee.model.Employee;
 import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
-import com.thoughtworks.springbootemployee.repository.RetiringEmployeeRepository;
-import net.minidev.json.JSONUtil;
-import org.junit.After;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +11,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.web.servlet.function.RequestPredicates.contentType;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -29,7 +22,7 @@ public class EmployeeIntegrationTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private RetiringEmployeeRepository employeeRepository;
+    private EmployeeRepository employeeRepository;
 
     @AfterEach
     public void after() {
@@ -175,8 +168,17 @@ public class EmployeeIntegrationTest {
                 .andExpect(jsonPath("$.age").value(21))
                 .andExpect(jsonPath("$.gender").value("Male"))
                 .andExpect(jsonPath("$.salary").value(999));
-
-
+    }
+    @Test
+    void should_return_delete_employee_when_call_delete_employee_api() throws Exception {
+        //given
+        Employee employee1 = new Employee("BAG", 21, "Female", 999);
+        employeeRepository.save(employee1);
+        //when
+        //then
+        Integer savedEmployee = employee1.getId();
+        mockMvc.perform(MockMvcRequestBuilders.delete("/employees/{employeeId}", savedEmployee))
+                .andExpect(status().isOk());
     }
 
 
