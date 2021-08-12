@@ -86,7 +86,7 @@ public class EmployeeIntegrationTest {
         //when
         //then
         int id = savedEmployee.getId();
-        
+
         mockMvc.perform(MockMvcRequestBuilders.put("/employees/{id}", id)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(employeeWithNewInfo))
@@ -161,6 +161,25 @@ public class EmployeeIntegrationTest {
                 .andExpect(jsonPath("$[4].gender").value("Female"))
                 .andExpect(jsonPath("$[4].salary").value(999));
     }
+    @Test
+    void should_return_specific_employees_by_id_when_call_get_Employees_By_id_api() throws Exception {
+        //given
+        Employee employee1 = new Employee("JC", 21, "Male", 999);
+        employeeRepository.save(employee1);
+
+        //when
+        //then
+        Integer savedEmployee = employee1.getId();
+        mockMvc.perform(MockMvcRequestBuilders.get("/employees/{id}", savedEmployee))
+                .andExpect(jsonPath("$.name").value("JC"))
+                .andExpect(jsonPath("$.age").value(21))
+                .andExpect(jsonPath("$.gender").value("Male"))
+                .andExpect(jsonPath("$.salary").value(999));
+
+
+    }
+
+
 
 
 
