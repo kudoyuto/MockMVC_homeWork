@@ -1,15 +1,15 @@
 package com.thoughtworks.springbootemployee.controller;
 
 import com.thoughtworks.springbootemployee.model.Employee;
-import com.thoughtworks.springbootemployee.model.EmployeeMapper;
+import com.thoughtworks.springbootemployee.mapper.EmployeeMapper;
 import com.thoughtworks.springbootemployee.model.EmployeeRequest;
+import com.thoughtworks.springbootemployee.model.EmployeeResponse;
 import com.thoughtworks.springbootemployee.service.EmployeeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/employees")
@@ -31,8 +31,8 @@ public class EmployeesController {
     }
 
     @GetMapping(path = "/{employeeId}")
-    public Employee getEmployeeById(@PathVariable Integer employeeId) {
-        return employeeService.getEmployeeById(employeeId);
+    public EmployeeResponse getEmployeeById(@PathVariable Integer employeeId) {
+        return employeeMapper.toResponse(employeeService.getEmployeeById(employeeId));
     }
 
     @GetMapping(params = "gender")
