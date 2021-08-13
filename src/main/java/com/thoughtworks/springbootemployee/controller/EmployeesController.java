@@ -1,6 +1,8 @@
 package com.thoughtworks.springbootemployee.controller;
 
 import com.thoughtworks.springbootemployee.model.Employee;
+import com.thoughtworks.springbootemployee.model.EmployeeMapper;
+import com.thoughtworks.springbootemployee.model.EmployeeRequest;
 import com.thoughtworks.springbootemployee.service.EmployeeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -13,11 +15,14 @@ import java.util.stream.Collectors;
 @RequestMapping("/employees")
 public class EmployeesController {
 
+
     private final List<Employee> employees = new ArrayList<>();
     private EmployeeService employeeService;
+    private EmployeeMapper employeeMapper;
 
-    public EmployeesController(EmployeeService employeeService) {
+    public EmployeesController(EmployeeService employeeService, EmployeeMapper employeeMapper) {
         this.employeeService = employeeService;
+        this.employeeMapper = employeeMapper;
     }
 
     @GetMapping
@@ -47,8 +52,8 @@ public class EmployeesController {
     }
 //
     @PutMapping(path = "/{employeeId}")
-    public Employee updateEmployeeInformation(@PathVariable Integer employeeId, @RequestBody Employee employeeToBeUpdated) {
-        return employeeService.updateEmployeeInformation(employeeId,employeeToBeUpdated);
+    public Employee updateEmployeeInformation(@PathVariable Integer employeeId, @RequestBody EmployeeRequest employeeRequest) {
+        return employeeService.updateEmployeeInformation(employeeId,employeeMapper.toEntity(employeeRequest));
     }
 //
     @DeleteMapping(path = "/{employeeId}")
