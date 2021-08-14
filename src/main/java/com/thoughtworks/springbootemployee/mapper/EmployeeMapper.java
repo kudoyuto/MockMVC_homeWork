@@ -6,6 +6,9 @@ import com.thoughtworks.springbootemployee.model.EmployeeResponse;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class EmployeeMapper {
     public Employee toEntity(EmployeeRequest employeeRequest){
@@ -24,6 +27,17 @@ public class EmployeeMapper {
                 "        \"message\":Employee has been deleted\n" +
                 "}\n";
     }
+    public List<EmployeeResponse> toResponse(List<Employee> employees) {
+        List<EmployeeResponse> employeesResponse= new ArrayList<>();
 
+        employees.forEach(employee -> {
+            EmployeeResponse employeeResponse = new EmployeeResponse();
+            BeanUtils.copyProperties(employee, employeeResponse);
+            employeesResponse.add(employeeResponse);
+        });
+
+
+        return employeesResponse;
+    }
 
 }
