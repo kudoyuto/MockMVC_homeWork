@@ -5,11 +5,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
+
 public class EmployeeRequest {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+
+
     private String name;
     private Integer age;
     private String gender;
@@ -35,10 +34,6 @@ public class EmployeeRequest {
 
     public void setCompanyId(Integer companyId) {
         this.companyId = companyId;
-    }
-
-    public Integer getId() {
-        return id;
     }
 
     public String getName() {
