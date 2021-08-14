@@ -7,7 +7,7 @@ import java.util.List;
 public class Company {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String companyName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "companyId")
@@ -15,6 +15,9 @@ public class Company {
 
     public Company() {
 
+    }
+    public Company(String companyName) {
+        this.companyName = companyName;
     }
 
     public Company(Integer id, String companyName, List<Employee> employees) {
