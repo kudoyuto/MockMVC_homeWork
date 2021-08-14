@@ -19,4 +19,11 @@ public class EmployeeMapper {
         return employeeResponse;
 
     }
+    public String toResponse(){
+        return "{\n" +
+                "        \"message\":Employee has been deleted\n" +
+                "}\n";
+    }
+
+
 }

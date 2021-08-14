@@ -58,8 +58,9 @@ public class EmployeesController {
     }
 //
     @DeleteMapping(path = "/{employeeId}")
-    public void deleteEmployee(@PathVariable Integer employeeId) {
-         employeeService.deleteEmployee(employeeId);
+    public String deleteEmployee(@PathVariable Integer employeeId) {
+        employeeService.deleteEmployee(employeeId);
+        return employeeMapper.toResponse();
     }
 
 }
