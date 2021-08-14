@@ -47,37 +47,37 @@ public class EmployeeServiceTest {
 //        assertIterableEquals(employees, actualEmployees);
 //    }
 
-    @Test
-    void should_return_correct_employee_when_get_employee_by_id_given_an_employee_id(){
-        // Given
-        Employee employee = new Employee(1, "Yuto", 23, "Male", 15000);
-        given(employeeRepository.findById(1)).willReturn(java.util.Optional.of((employee)));
-
-        // When
-        Employee actualEmployees = employeeService.getEmployeeById(1);
-
-        // Then
-        assertEquals(employee, actualEmployees);
-    }
-
-    @Test
-    void should_return_male_employees_when_get_employee_by_gender_given_all_employees_and_male_as_gender(){
-        // Given
-        List<Employee> employees = new ArrayList<>();
-        employees.add(new Employee(1, "Yuto", 23, "Male", 15000));
-        employees.add(new Employee(2, "JC", 22, "Male", 10000));
-        employees.add(new Employee(4, "Donald", 21, "Male", 104400));
-        employees.add(new Employee(5, "Bob", 69, "Male", 10000));
-        given(employeeRepository.findAllByGender("Male")).willReturn(employees);
-
-        // When
-        List<Employee> maleEmployees = employeeService.getAllEmployeesByGender("Male");
-
-        // Then
-        assertEquals(employees, maleEmployees);
-        assertEquals(employees.size(), maleEmployees.size());
-        assertIterableEquals(employees, maleEmployees);
-    }
+//    @Test
+//    void should_return_correct_employee_when_get_employee_by_id_given_an_employee_id(){
+//        // Given
+//        Employee employee = new Employee(1, "Yuto", 23, "Male", 15000);
+//        given(employeeRepository.findById(1)).willReturn(java.util.Optional.of((employee)));
+//
+//        // When
+//        Employee actualEmployees = employeeService.getEmployeeById(1);
+//
+//        // Then
+//        assertEquals(employee, actualEmployees);
+//    }
+//
+//    @Test
+//    void should_return_male_employees_when_get_employee_by_gender_given_all_employees_and_male_as_gender(){
+//        // Given
+//        List<Employee> employees = new ArrayList<>();
+//        employees.add(new Employee(1, "Yuto", 23, "Male", 15000));
+//        employees.add(new Employee(2, "JC", 22, "Male", 10000));
+//        employees.add(new Employee(4, "Donald", 21, "Male", 104400));
+//        employees.add(new Employee(5, "Bob", 69, "Male", 10000));
+//        given(employeeRepository.findAllByGender("Male")).willReturn(employees);
+//
+//        // When
+//        List<Employee> maleEmployees = employeeService.getAllEmployeesByGender("Male");
+//
+//        // Then
+//        assertEquals(employees, maleEmployees);
+//        assertEquals(employees.size(), maleEmployees.size());
+//        assertIterableEquals(employees, maleEmployees);
+//    }
 //
 //    @Test
 //    void should_return_correct_list_of_employees_by_Pagination_when_get_employees_by_pagination_given__all_employees_pageIndex_and_page_size(){
@@ -95,17 +95,17 @@ public class EmployeeServiceTest {
 //        assertEquals(employees.size(), actualEmployees.size());
 //    }
 //
-    @Test
-    void should_add_employee_when_add_Employee_given_a_new_employee(){
-        // Given
-        Employee employee = new Employee(7, "Bell", 69, "Male", 16900);
-
-        // When
-        employeeService.addEmployee(employee);
-
-        // Then
-        verify(employeeRepository, times(1)).save(employee);
-    }
+//    @Test
+//    void should_add_employee_when_add_Employee_given_a_new_employee(){
+//        // Given
+//        Employee employee = new Employee(7, "Bell", 69, "Male", 16900);
+//
+//        // When
+//        employeeService.addEmployee(employee);
+//
+//        // Then
+//        verify(employeeRepository, times(1)).save(employee);
+//    }
 //
 //    @Test
 //    void should_update_employee_when_update_Employee_Information_given_an_updated_employee_information(){

@@ -31,6 +31,7 @@ public class CompanyService {
 
     public List<Employee> getCompanyEmployees(Integer companyId) {
         Company company = companyRepository.findById(companyId).orElse(null);
+        assert company != null;
         return company.getEmployees();
     }
 
