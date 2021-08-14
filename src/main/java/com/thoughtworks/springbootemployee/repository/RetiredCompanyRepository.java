@@ -12,34 +12,7 @@ import java.util.stream.Collectors;
 public class RetiredCompanyRepository {
     private List<Company> companies;
 
-    public RetiredCompanyRepository() {
-        List<Employee> ooclEmployees = new ArrayList<>();
-        ooclEmployees.add(new Employee(1,"JC", 23, "Male", 10 ));
 
-        List<Employee> coscoEmployees = new ArrayList<>();
-        coscoEmployees.add(new Employee(1,"Pekora", 23, "Female", 1023 ));
-
-        List<Employee> holoEmployees = new ArrayList<>();
-        holoEmployees.add(new Employee(1,"Coco", 23, "Female", 1044 ));
-
-        List<Employee> nijisanjiEmployees = new ArrayList<>();
-        nijisanjiEmployees.add(new Employee(1,"Gura", 23, "Female", 666 ));
-
-        List<Employee> vtuberEmployees = new ArrayList<>();
-        vtuberEmployees.add(new Employee(1,"TMT", 23, "Female", 10000 ));
-
-        List<Employee> xiaomiEmployees = new ArrayList<>();
-        xiaomiEmployees.add(new Employee(1,"Peko", 23, "Male", 10 ));
-
-
-        companies = new ArrayList<>();
-        companies.add(new Company(1, "OOCL",  ooclEmployees));
-        companies.add(new Company(2, "COSCO",coscoEmployees));
-        companies.add(new Company(3, "HOLOLIVE",  holoEmployees));
-        companies.add(new Company(4, "NIJISANJI",  nijisanjiEmployees));
-        companies.add(new Company(5, "VTUBER",  vtuberEmployees));
-        companies.add(new Company(6, "XIAOMI",  xiaomiEmployees));
-    }
 
     public List<Company> getCompanies() {
         return companies;
